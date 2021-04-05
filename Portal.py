@@ -5,8 +5,11 @@ import json
 
 import local_setting as config
 
+#csv file path
 csv_file = config.csv_file["file_path"]
 
+# saving csf file data into dataframe
+df = pd.read_csv(csv_file)
 
 app = Flask(__name__)
 
@@ -18,26 +21,31 @@ def hello():
 
 @app.route("/get_books/<numbers>")
 def read_csv(numbers):
-    # print(numbers,type(numbers))
-    # df = pd.read_csv(r"D:\abhay\Interview\ICAV\Books_Portal\data\books.csv",nrows=int(numbers))
-    df = pd.read_csv(csv_file, nrows=int(numbers))
-    # df_book = pd.DataFrame[{'books':[1]}]
+    try:
 
-    # Cleaning data as empty into null in csv
-    # cleaned_df = df.fillna("null")
-    # result = cleaned_df.to_json(orient="records")
+        # print(numbers,type(numbers))
+        # df = pd.read_csv(r"D:\abhay\Interview\ICAV\Books_Portal\data\books.csv",nrows=int(numbers))
+        # df = pd.read_csv(csv_file, nrows=int(numbers))
 
-    result = df.to_json(orient="records")
-    # df.to_json('books.json',orient="records",)
-    final_result = {"books": json.loads(result)}
+        # Cleaning data as empty into null in csv
+        # cleaned_df = df.fillna("null")
+        # result = cleaned_df.to_json(orient="records")
+        result = df.head(int(numbers))
 
-    # dj = json.loads(result)
-    # print("dj",dj)
-    # dc = {"books":dj}
-    # print(dc)
+        result = result.to_json(orient="records")
+        # df.to_json('books.json',orient="records",)
+        final_result = {"books": json.loads(result)}
+
+        # dj = json.loads(result)
+        # print("dj",dj)
+        # dc = {"books":dj}
+        # print(dc)
 
 
-    return final_result
+        return final_result
+    except Exception as e:
+        print(e)
+        return "Got some exception please check input passed"
 
 
 
