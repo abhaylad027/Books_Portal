@@ -1,3 +1,4 @@
+
 from flask import Flask, request
 import pandas as pd
 import json
@@ -19,6 +20,7 @@ def hello():
 
 
 # getting books records as enetered number of books
+
 @app.route("/get_books/<numbers>")
 def read_csv(numbers):
     try:
@@ -35,7 +37,7 @@ def read_csv(numbers):
         return final_result
     except Exception as e:
         print(e)
-        return "Got some exception please check input passed with following error\n{}".format(e)
+        return "Got  error\n {}".format(e)
 
 
 # for getting filtered records as per column value
