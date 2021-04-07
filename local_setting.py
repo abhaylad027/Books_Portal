@@ -3,3 +3,6 @@
 
 # path of csv file
 csv_file = {"file_path": r"D:\abhay\Interview\ICAV\Books_Portal\data\books.csv"}
+
+# configurable port number to run
+custom_port = 5067

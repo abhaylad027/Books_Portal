@@ -13,13 +13,13 @@ df = pd.read_csv(csv_file)
 app = Flask(__name__)
 
 # getting books records as enetered number of books
-@app.route("/get_books/<numbers>")
-def read_csv(numbers):
+@app.route("/get_books/<rows>")
+def read_csv(rows):
     try:
 
         # if requested number of books are more than number of books exists in csv file
         # selecting records from data frame
-        result = df.head(int(numbers))
+        result = df.head(int(rows))
 
         # converting data dataframe rows into json object
         result = result.to_json(orient="records")
@@ -82,4 +82,4 @@ def page_not_found(e):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=config.custom_port)
